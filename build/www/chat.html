@@ -111,22 +111,19 @@
 			height:calc(100% - 30px);
 			}
 			#log button{
-			font-size:20px;
+			font-size:23px;
 			position:fixed;
-			padding:5px 10px;
-			top:3px;
-			left:3px;
+			padding:2px 6px;
+			top:0px;
+			left:0px;
 			border:none;
 			font-family:arial;
-			background-color: #502570;
-			border: 2px solid white;
-			border-radius: 4px;
-			box-shadow: inset 3px 3px 2px 2px #803376, inset -3px -3px 2px 2px #351044;
+			background-color: rgb(161 56 214 / 50%);
+			border: 2px solid #AD43C8;
 			color:white;
 			z-index:-10;
 			}
 			#log button:active{
-			box-shadow: inset 3px 3px 2px 2px #351044, inset -3px -3px 2px 2px #803376;
 			}
 			#mainlog{
 				position:fixed;
@@ -140,9 +137,7 @@
 				width:100%;
 				box-sizing: border-box;
 				font-size:20px;
-				border-radius:0px 5px 0px 0px;
-				background-color: #6d3399;  
-				box-shadow: inset -3px 3px 3px 2px rgba(255,255,255,0.2);     
+				background-color: rgb(41 11 64 / 50%);
 			}
 			#title i{
 				float:right;
@@ -154,8 +149,7 @@
 				left:0px;
 				box-sizing: border-box;
 				height:calc(100% - 31px);
-				background-color:rgba(0,0,0,0.8);
-				box-shadow: inset -3px 0px 3px 2px rgba(255,255,255,0.4);    
+				background-color:rgba(83 35 120 / 50%);  
 				overflow-y:scroll;
 				border-radius:0px 0px 5px 0px;
 				overflow-x:break;
@@ -200,7 +194,50 @@
 			  font-size: 11px;
 			  color: #000;}
 
-		</style>
+    #left_panel {
+        position: fixed;
+        left: 8px;
+        bottom: 42px; /* sits directly above #chat_bar — adjust this if your chat_bar height differs */
+        top: auto;
+        width: auto;
+        height: auto;
+        background: transparent;
+        z-index: 1000;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+.left_panel_hint {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 12px;
+    opacity: 0.65;
+    white-space: nowrap;   /* forces it onto one line */
+    line-height: 1.3;
+    margin-bottom: 4px;
+}
+    .left_panel_item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        cursor: default;
+    }
+    .left_panel_item img {
+        opacity: 1;
+        cursor: default;
+    }
+    .left_panel_item .item_label {
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 11px;
+        line-height: 1.4;
+        opacity: 0.65;
+    }
+</style>
     </head>
     <body oncontextmenu="return false">
         <style id="theme"></style>
@@ -211,18 +248,15 @@
             <div id="bonzi_tv"></div>
 			<div id="log" style="display:none;">
 			<div id="mainlog" style="display:none;">
-			<div id="title">Bonzi LOG ™ <i onclick="$('#logshow').show();$('#mainlog').hide()" class="fa fa-close" aria-hidden="true"></i></div>
+			<div id="title">Message Log <i onclick="$('#logshow').show();$('#mainlog').hide()" class="fa fa-close" aria-hidden="true"></i></div>
 			<div id="logcontent">
 				<p>Welcome to BonziWORLD Community Editon&reg;</p>
 			</div>
 			</div>
 			<button id="logshow" onclick="showtoggle()"><i class="fa fa-bars" aria-hidden="true"></i></button>
 			</div>
+
             <div id="room_info">
-				
-				<div id="arcade_btn" class="no_selection log-minimized" alt="Arcade" title="Arcade" onclick='$("#page_arcade_menu").show()'>
-					<span id="arcade_label" class="no_selection"><img src="./img/arcade_v2.png" width="32" draggable="false" /><br>Arcade</span>
-				</div>
                 Room ID: <span id="room_id">???</span>
                 <br />
                 <span id="room_public">This room is public.</span>
@@ -232,28 +266,22 @@
                     You are the owner of this room.
                 </span>
                 <br />
-				<!-- ha ha get skidded colin -->
-				<span id="memcount">Bonzis Count: ???</span>
-                    <div id="clicmds" style="display: none;">
-                        
-                        <br />
-                        <big>
-                            <a href="javascript:espeaktts = !espeaktts">Enable/Disable eSpeak</a>
-                            <br />
-                            Voices list (only works when eSpeak is disabled)
-                        </big>
-                        <br />
-                        <select name="voice" id="voice"></select>
-                        <br />
-                        <!-- <a href="https://discord.gg/T4FtbuKuqq">Psst.. We have a Discord Server</a> -->
-                        <br />
-                        <br />
-                        <a href="javascript:print();">Print BonziWORLD!</a>
+<div id="left_panel">
+    <div class="left_panel_hint no_selection">Tap &amp; Hold, right click or click to open these menus.</div>
+    <div class="left_panel_item no_selection" id="arcade_btn" title="Arcade" onclick='$("#page_arcade_menu").show()'>
+        <img src="./img/arcade_v2.png" width="32" draggable="false" />
+        <span class="item_label">Arcade</span>
+    </div>
+    <div class="left_panel_item no_selection" id="themes_btn" title="Right-click for Themes">
+        <img src="./img/themes.png" width="32" draggable="false" />
+        <span class="item_label">Settings</span>
+    </div>
+</div>
+
 
                     </div>
             </div>
-            <canvas id="bonzi_canvas" width="100" height="100"> </canvas>
-            <div id="main"></div>
+<canvas id="bonzi_canvas" width="100" height="100" style="filter: drop-shadow(20px -5px 4px rgba(0,0,0,0.2));"></canvas>            <div id="main"></div>
             <table id="chat_bar">
                 <tr>
                     <td id="chat_send">Send</td> 
@@ -278,13 +306,13 @@
                 <div id="login_readme" style="display: none;">
                     Make sure you read the <a href="readme" target="_blank">README</a> before use.
 					<hr>
-					<a href="misc">Miscellaneous Links</a> <a href="https://discord.gg/PD9Tbr7Efh">Discord Server</a> <a href="./lite/">BWCE Lite</a>
+					<a href="https://discord.gg/kYHDkfMtTb">BonziCORD</a> <a href="./lite/">BWCE Lite</a>
 					<br>
-					NEW MILESTONE: We've (almost) reached 20 users in the room ID 'default'!
+                    Welcome to BonziWORLD Community Edition! BWCE Is Back for a Long Time!
 				</div>
                 <div id="login_load">loading... <img id="loading_cursor" src="./img/cursors/hourglas.gif"></div>
                 <div id="recaptcha_verify" class="g-recaptcha" data-sitekey="6Len81UkAAAAANyLdzauK4uOSNvwOBWL9BwBcDU0" data-callback="onSubmit" data-size="invisible"></div>
-                <div id="login_version">Version 1.20.0<br><small>Made with heyjoeway's BonziWORLD Version 1.6.0 and Techy's BonziWORLD Community Edition v1.14.4</small><br><a href="#" onclick="promptForServerURL()">Connect to a 3rd party server</a></div>
+                <div id="login_version">Version 1.00.0<br><small>Made with heyjoeway's BonziWORLD Version 1.6.0 and Techy's BonziWORLD Community Edition v1.14.4</small><br><a href="#" onclick="promptForServerURL()">Connect to a 3rd party server</a></div>
 				<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 				<div id="winlogon" style="display: none;">
@@ -759,5 +787,51 @@
                 //document.location.reload(true);
             }
         </script>
-    </body>
+        <script>
+        $(document).ready(function() {
+            $.contextMenu({
+                selector: '#themes_btn',
+                trigger: 'right',
+                items: {
+                    default_theme: {
+                        name: "Default",
+                        callback: function() { theme(""); }
+                    },
+                    compact: {
+                        name: "Compact",
+                        callback: function() { theme("#content {background-color: #452066; }"); }
+                    },
+                    dark: {
+                        name: "Dark Mode",
+                        callback: function() {
+                            theme('#chat_bar{background-image:url("../img/desktop/taskbar_dark.png")}#chat_send{background-image:url("../img/desktop/start_dark.png")}#chat_tray{background-image:url("../img/desktop/notif_left_dark.png"), url("../img/desktop/notif_dark.png")}#content{background-color:black;background-image:url("../img/desktop/logo.png"), url("../img/desktop/bg_dark.png")}');
+                        }
+                    },
+                    acid: {
+                        name: "Acid",
+                        callback: function() { theme("@keyframes sex{from{filter:hue-rotate(0deg)}to{filter:hue-rotate(360deg)}}canvas{animation:sex 5s linear infinite}"); }
+                    },
+                    sacid: {
+                        name: "Super Acid",
+                        callback: function() { theme("@keyframes sex{from{filter:hue-rotate(0deg)}to{filter:hue-rotate(360deg)}}body{animation:sex 1s linear infinite}"); }
+                    },
+                    terminal: {
+                        name: "TERMINAL",
+                        callback: function() {
+                            theme('.bubble,.bonzi_name,.bubble::after{background:0!important;border:0}*{color:green!important;font-family:monospace!important}#content{background:#000}.bubble-content::before{content:">"}.bonzi_name{padding:0;position:static}.bubble{overflow:visible}.bubble-left{right:0px}input[type=text]{background-color:#000;border:0}#chat_send,#chat_tray{display:none}#chat_bar{background:0}');
+                        }
+                    },
+                    custom: {
+                        name: "Custom Wallpaper...",
+                        callback: function() {
+                            var url = prompt('Insert image URL for background','https://bonziworld.co/img/desktop/bg_xp.png');
+                            if (url) { theme('#content{background-color:blue;background-image:url("../img/desktop/logo.png"), url("' + url + '"); background-repeat: no-repeat, repeat; background-size: auto, cover;}'); }
+                        }
+                    }
+                }
+            });
+        });
+        </script>
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"31de3e83039b4f1786fc2c7880bd88cd","r":1}' crossorigin="anonymous"></script>
+</body>
 </html>
